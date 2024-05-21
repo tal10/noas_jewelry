@@ -1,0 +1,58 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    background-image: url("../Images/turt.png");
+    background-size: cover;
+}
+
+h1 {
+    color: hotpink;
+}
+
+.jewelryType {
+    border-block: dashed;
+    border-width: 1px;
+    background-color:hotpink;
+    width: 40%;
+}
+
+.center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: darkslateblue;
+}
+
+    .topnav a {
+        float: left;
+        color: lightyellow;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+        .topnav a:hover {
+            background-color: paleturquoise;
+            color: lightpink;
+        }
+
+        .topnav a.active {
+            background-color: royalblue;
+            color: lightgoldenrodyellow;
+        }
+
+
+.greeting {
+    float: left;
+    color: blue;
+    font-family:'Bell MT';
+}
+
+.registerRow {
+    color:blue;
+}

@@ -1,0 +1,76 @@
+# Visual Studio files
+.vs/
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.log
+*.vspscc
+*.pubxml
+*.user
+*.dll
+*.cache
+*.suo
+*.user
+*.pdb
+*.idb
+*.exe
+*.dll.config
+*.config
+*.deploy
+*.manifest
+*.vsmdi
+*.coverage
+*.csproj.user
+*.iuser
+*.ide
+
+# WebMatrix
+_pvt
+_wp
+
+# ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# NuGet
+packages/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# Entity Framework
+*.model
+*.edmx
+*.dd
+
+# Node.js
+node_modules/
+
+
+# SQL Server
+*.mdf
+*.ldf
