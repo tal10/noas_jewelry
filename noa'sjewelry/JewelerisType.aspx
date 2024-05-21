@@ -29,6 +29,7 @@
                     {
                 %>
                 <a href="UserProfile.aspx">My Details</a>
+                <a href="Cart.aspx">My Cart</a>
                 <%
                     }
                 %>
@@ -55,16 +56,21 @@
             </div>
 
             <h1>Jewelry List</h1>
+
             <asp:Repeater ID="rptJewelries" runat="server">
                 <ItemTemplate>
                     <div class="jewelryType">
                         <h2><%# Eval("Name") %></h2>
                         <p>Price: <%# Eval("Price") %></p>
                         <img src="Images/<%# Eval("PictureUrl") %>" width="200px" height="200px" alt='<%# Eval("Name") %>' />
+                        <br />
+                        <asp:Button ID="btnAddToCart" runat="server" Text="Add to Cart" OnClick="btnAddToCart_Click" CommandArgument='<%# Eval("JewelryId") %>' />
                     </div>
                     <br />
                 </ItemTemplate>
             </asp:Repeater>
+
+            <asp:Label ID="lblMessage" runat="server" Text="" ForeColor="Red"></asp:Label>
         </div>
     </form>
 </body>

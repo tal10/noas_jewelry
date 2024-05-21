@@ -28,6 +28,7 @@
                 {
             %>
             <a href="UserProfile.aspx">My Details</a>
+            <a href="Cart.aspx">My Cart</a>
             <%
                 }
             %>
@@ -65,7 +66,7 @@
                 </tr>
                 <tr>
                     <td><a href="JewelerisType.aspx?type=3">צמידים</a></td>
-                    <td><a href="JewelerisType.aspx?type=1">
+                    <td><a href="JewelerisType.aspx?type=4">
                         <img src="../Images/earrings.png" width="200" height="60">
                     </a></td>
 

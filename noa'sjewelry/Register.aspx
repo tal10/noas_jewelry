@@ -49,6 +49,7 @@
                     {
                 %>
                 <a href="UserProfile.aspx">My Details</a>
+                <a href="Cart.aspx">My Cart</a>
                 <%
                     }
                 %>

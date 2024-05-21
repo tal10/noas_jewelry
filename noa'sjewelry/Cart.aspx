@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Contact.aspx.cs" Inherits="Contact" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Cart.aspx.cs" Inherits="Cart" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Contact</title>
+    <title>Cart</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link rel="stylesheet" href="Styles/StyleSheet.css" />
 </head>
@@ -54,16 +54,20 @@
             %>
         </div>
 
-        <div align="center">
-            <h1>Contact</h1>
-            phone number:0533325137
-            <br />
-            instegram:noas_jewely
-            <br />
-            facbook:noas_jewely1
-            <br />
-            Mail:noasjewely@gmail.com
-        </div>
+        <h1>My cart</h1>
+
+        <asp:Repeater ID="rptCartItems" runat="server">
+            <ItemTemplate>
+                <div>
+                    <h2><%# Eval("Name") %></h2>
+                    <p>Price: <%# Eval("Price", "{0:C}") %></p>
+                    <!-- Display other details if needed -->
+                </div>
+                <br />
+            </ItemTemplate>
+        </asp:Repeater>
+
+        <asp:Label ID="lblMessage" runat="server" Text="" ForeColor="Red"></asp:Label>
     </form>
 </body>
 </html>

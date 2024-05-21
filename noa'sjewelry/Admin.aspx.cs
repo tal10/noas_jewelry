@@ -15,7 +15,7 @@ public partial class Admin : System.Web.UI.Page
         if (Session["isAdmin"] == null || !(bool)Session["isAdmin"])
         {
             // Redirect to login page or unauthorized access page
-            Response.Redirect("~/Default.aspx");
+            Response.Redirect("Login.aspx");
         }
 
         if (!IsPostBack)
