@@ -13,16 +13,18 @@ public partial class Register : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        // If the user already connected - regular user or admin
         if ((Session["isAdmin"] != null && (bool)Session["isAdmin"] == true) ||
             (Session["userName"] != null))
         {
-            // Redirect to login page or unauthorized access page
+            // Redirect to home page
             Response.Redirect("~/Default.aspx");
         }
     }
 
     protected void btnRegister_Click(object sender, EventArgs e)
     {
+        // Take all user input
         string userName = txtUsername.Text.Trim();
         string password = txtPassword.Text;
         string confirmPassword = txtConfirmPassword.Text;
@@ -31,15 +33,16 @@ public partial class Register : System.Web.UI.Page
         string lastName = txtLastName.Text.Trim();
         string email = txtEmail.Text.Trim();
         string phoneNumber = txtPhoneNumber.Text.Trim();
-         string birthDate = txtBirthdate.Text.Trim();
+        string birthDate = txtBirthdate.Text.Trim();
 
+        // If at least one of the input is empty
         if (userName == "" || password == "" || confirmPassword == "" || firstName == "" || lastName == "" || email == "" || phoneNumber == "" || birthDate == "")
         {
             lblMessage.Text = "All fields must be filled";
             return;
         }
 
-        // Validate password and confirm password
+        // Validate password and confirm password are the same
         if (password != confirmPassword)
         {
             lblMessage.Text = "Passwords do not match.";
@@ -53,16 +56,16 @@ public partial class Register : System.Web.UI.Page
             return;
         }
 
+        // Connect to database
         string path = HttpContext.Current.Server.MapPath("App_Data/");
         path += "Database.mdf";
-
-        // Insert data into Users table in the database
         string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;AttachDbFilename=" + path + ";Integrated Security=True;";
         SqlConnection connection = new SqlConnection(connectionString);
 
         string query = "INSERT INTO Users (UserName, [Password], Gender, FirstName, LastName, Email, PhoneNumber, BirthDate) " +
                        "VALUES (@Username, @Password, @Gender, @FirstName, @LastName, @Email, @PhoneNumber, @Birthdate)";
 
+        // Set all query input - from the user inputs
         SqlCommand command = new SqlCommand(query, connection);
         command.Parameters.AddWithValue("@Username", userName);
         command.Parameters.AddWithValue("@Password", password);
@@ -73,15 +76,21 @@ public partial class Register : System.Web.UI.Page
         command.Parameters.AddWithValue("@PhoneNumber", phoneNumber);
         command.Parameters.AddWithValue("@Birthdate", birthDate);
 
-
+        // Open the connection to the database
         connection.Open();
+
+        // Execute the query - Insert new row into Users table
         int rowsAffected = command.ExecuteNonQuery();
+
+        // Close the connection to the database
         connection.Close();
 
+        // If user name added successfully
         if (rowsAffected > 0)
         {
             lblMessage.Text = "Registration successful.";
             Session["userName"] = userName;
+            Session["userFullName"] = $"{firstName} {lastName}";
         }
         else
         {
@@ -92,12 +101,14 @@ public partial class Register : System.Web.UI.Page
     // Method to check if the username already exists
     private bool IsUsernameExists(string username)
     {
+        // Connect to database
         SqlConnection connection = DatabaseHelper.GetOpenConnection();
 
         string query = "SELECT COUNT(*) FROM Users WHERE UserName = @Username";
         SqlCommand command = new SqlCommand(query, connection);
         command.Parameters.AddWithValue("@Username", username);
 
+        // Execute the query
         int count = (int)command.ExecuteScalar();
 
         DatabaseHelper.CloseConnection(connection);
