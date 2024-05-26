@@ -59,8 +59,6 @@ public partial class Login : System.Web.UI.Page
                 // Login failed, display error message
                 lblMessage.Text = "Invalid username or password. Please try again.";
             }
-
-           
         }
     }
 }

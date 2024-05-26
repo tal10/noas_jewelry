@@ -27,7 +27,6 @@
                 else
                 {
             %>
-            <a href="UserProfile.aspx">My Details</a>
             <a href="Cart.aspx">My Cart</a>
             <%
                 }
@@ -38,6 +37,12 @@
                 {
             %>
             <a href="Admin.aspx">Admin Page</a>
+            <%
+                }
+                else if (Session["userName"] != null)
+                {
+            %>
+            <a href="UserProfile.aspx">My Details</a>
             <%
                 }
             %>
@@ -53,21 +58,27 @@
                 }
             %>
         </div>
+        <br />
+        <div class="greeting">
+            <asp:Label ID="lblGreeting" runat="server" Text=""></asp:Label>
+        </div>
 
-        <h1>My cart</h1>
+        <div align="center">
+            <h1>My cart</h1>
 
-        <asp:Repeater ID="rptCartItems" runat="server">
-            <ItemTemplate>
-                <div>
-                    <h2><%# Eval("Name") %></h2>
-                    <p>Price: <%# Eval("Price", "{0:C}") %></p>
-                    <!-- Display other details if needed -->
-                </div>
-                <br />
-            </ItemTemplate>
-        </asp:Repeater>
+            <asp:Repeater ID="rptCartItems" runat="server">
+                <ItemTemplate>
+                    <div>
+                        <h2><%# Eval("Name") %></h2>
+                        <p>Price: <%# Eval("Price", "{0:C}") %></p>
+                        <!-- Display other details if needed -->
+                    </div>
+                    <br />
+                </ItemTemplate>
+            </asp:Repeater>
 
-        <asp:Label ID="lblMessage" runat="server" Text="" ForeColor="Red"></asp:Label>
+            <asp:Label ID="lblMessage" runat="server" Text="" ForeColor="Red"></asp:Label>
+        </div>
     </form>
 </body>
 </html>

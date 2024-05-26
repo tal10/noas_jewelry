@@ -28,7 +28,6 @@
                     else
                     {
                 %>
-                <a href="UserProfile.aspx">My Details</a>
                 <a href="Cart.aspx">My Cart</a>
                 <%
                     }
@@ -39,6 +38,12 @@
                     {
                 %>
                 <a href="Admin.aspx">Admin Page</a>
+                <%
+                    }
+                    else if (Session["userName"] != null)
+                    {
+                %>
+                <a href="UserProfile.aspx">My Details</a>
                 <%
                     }
                 %>
@@ -54,59 +59,66 @@
                     }
                 %>
             </div>
-            <h2>User Profile</h2>
-            <table>
-                <tr>
-                    <td>
-                        <asp:Label ID="lblUserName" runat="server" Text="Username:"></asp:Label></td>
-                    <td>
-                        <asp:TextBox ID="txtUserName" runat="server" ReadOnly="true"></asp:TextBox></td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="lblFirstName" runat="server" Text="First Name:"></asp:Label></td>
-                    <td>
-                        <asp:TextBox ID="txtFirstName" runat="server"></asp:TextBox></td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="lblLastName" runat="server" Text="Last Name:"></asp:Label></td>
-                    <td>
-                        <asp:TextBox ID="txtLastName" runat="server"></asp:TextBox></td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="lblEmail" runat="server" Text="Email:"></asp:Label></td>
-                    <td>
-                        <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox></td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="lblPhoneNumber" runat="server" Text="Phone Number:"></asp:Label></td>
-                    <td>
-                        <asp:TextBox ID="txtPhoneNumber" runat="server"></asp:TextBox></td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="lblBirthDate" runat="server" Text="Birth Date:"></asp:Label></td>
-                    <td>
-                        <asp:TextBox ID="txtBirthDate" runat="server"></asp:TextBox></td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="lblPassword" runat="server" Text="New Password:"></asp:Label></td>
-                    <td>
-                        <asp:TextBox ID="txtPassword" runat="server" TextMode="Password"></asp:TextBox></td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <asp:Button ID="btnUpdate" runat="server" Text="Update" OnClick="btnUpdate_Click" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <asp:Label ID="lblMessage" runat="server" Text="" ForeColor="Red"></asp:Label></td>
-                </tr>
-            </table>
+            <br />
+            <div class="greeting">
+                <asp:Label ID="lblGreeting" runat="server" Text=""></asp:Label>
+            </div>
+
+            <div align="left">
+                <h2>User Profile</h2>
+                <table>
+                    <tr>
+                        <td>
+                            <asp:Label ID="lblUserName" runat="server" Text="Username:"></asp:Label></td>
+                        <td>
+                            <asp:TextBox ID="txtUserName" runat="server" ReadOnly="true"></asp:TextBox></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="lblFirstName" runat="server" Text="First Name:"></asp:Label></td>
+                        <td>
+                            <asp:TextBox ID="txtFirstName" runat="server"></asp:TextBox></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="lblLastName" runat="server" Text="Last Name:"></asp:Label></td>
+                        <td>
+                            <asp:TextBox ID="txtLastName" runat="server"></asp:TextBox></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="lblEmail" runat="server" Text="Email:"></asp:Label></td>
+                        <td>
+                            <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="lblPhoneNumber" runat="server" Text="Phone Number:"></asp:Label></td>
+                        <td>
+                            <asp:TextBox ID="txtPhoneNumber" runat="server"></asp:TextBox></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="lblBirthDate" runat="server" Text="Birth Date:"></asp:Label></td>
+                        <td>
+                            <asp:TextBox ID="txtBirthDate" runat="server"></asp:TextBox></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="lblPassword" runat="server" Text="New Password:"></asp:Label></td>
+                        <td>
+                            <asp:TextBox ID="txtPassword" runat="server" TextMode="Password"></asp:TextBox></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <asp:Button ID="btnUpdate" runat="server" Text="Update" OnClick="btnUpdate_Click" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <asp:Label ID="lblMessage" runat="server" Text="" ForeColor="Red"></asp:Label></td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </form>
 </body>

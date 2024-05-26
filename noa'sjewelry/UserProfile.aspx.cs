@@ -17,6 +17,8 @@ public partial class UserProfile : System.Web.UI.Page
             Response.Redirect("Login.aspx");
         }
 
+        lblGreeting.Text = Utils.GetGreeting(Session);
+
         if (!IsPostBack)
         {
             // Load user details

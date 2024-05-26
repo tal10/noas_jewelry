@@ -27,7 +27,6 @@
                 else
                 {
             %>
-            <a href="UserProfile.aspx">My Details</a>
             <a href="Cart.aspx">My Cart</a>
             <%
                 }
@@ -38,6 +37,12 @@
                 {
             %>
             <a href="Admin.aspx">Admin Page</a>
+            <%
+                }
+                else if (Session["userName"] != null)
+                {
+            %>
+            <a href="UserProfile.aspx">My Details</a>
             <%
                 }
             %>
@@ -53,6 +58,10 @@
                 }
             %>
         </div>
+        <br />
+        <div class="greeting">
+            <asp:Label ID="lblGreeting" runat="server" Text=""></asp:Label>
+        </div>
 
         <div align="center">
             <h1>Jewelries</h1>
@@ -60,14 +69,16 @@
             <table border="1">
                 <tr>
                     <td><a href="JewelerisType.aspx?type=1">
-                        <img src="../Images/rings.png" width="200" height="60">
+                        <img src="../Images/rings.png" width="300" height="100">
                     </a></td>
-                    <td><a href="JewelerisType.aspx?type=2">שרשראות</a></td>
+                    <td><a href="JewelerisType.aspx?type=2">
+                        <img src="../Images/necklace.png" width="300" height="100"></a></td>
                 </tr>
                 <tr>
-                    <td><a href="JewelerisType.aspx?type=3">צמידים</a></td>
+                    <td><a href="JewelerisType.aspx?type=3">
+                        <img src="../Images/bracelets.png" width="300" height="100"></a></td>
                     <td><a href="JewelerisType.aspx?type=4">
-                        <img src="../Images/earrings.png" width="200" height="60">
+                        <img src="../Images/earrings.png" width="300" height="100">
                     </a></td>
 
                 </tr>

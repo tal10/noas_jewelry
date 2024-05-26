@@ -28,7 +28,6 @@
                     else
                     {
                 %>
-                <a href="UserProfile.aspx">My Details</a>
                 <a href="Cart.aspx">My Cart</a>
                 <%
                     }
@@ -39,6 +38,12 @@
                     {
                 %>
                 <a href="Admin.aspx">Admin Page</a>
+                <%
+                    }
+                    else if (Session["userName"] != null)
+                    {
+                %>
+                <a href="UserProfile.aspx">My Details</a>
                 <%
                     }
                 %>
@@ -79,7 +84,7 @@
                         <asp:Label ID="lblMessage" runat="server" Text="" ForeColor="Red"></asp:Label></td>
                 </tr>
                 <tr>
-                    <td colspan="2" class="registerRow">if you have already account you can register <a href="Register.aspx">here</a>
+                    <td colspan="2" class="registerRow">if you don't have an account you can register <a href="Register.aspx">here</a>
                     </td>
                 </tr>
             </table>

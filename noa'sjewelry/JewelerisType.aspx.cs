@@ -11,6 +11,8 @@ public partial class JewelerisType : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        lblGreeting.Text = Utils.GetGreeting(Session);
+
         if (!IsPostBack)
         {
             LoadJewelries();

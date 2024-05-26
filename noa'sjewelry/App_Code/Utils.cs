@@ -44,4 +44,18 @@ public static class Utils
         return menuHTML;
     }
 
+    public static string GetGreeting(HttpSessionState session)
+    {
+        string greeting = null;
+        if (session["isAdmin"] != null && (bool)session["isAdmin"] == true)
+        {
+            greeting = "Welcome, Admin!";
+        }
+        else if (session["userName"] != null)
+        {
+            string userName = session["userName"].ToString();
+            greeting = $"Welcom, {userName}!";
+        }
+        return greeting;
+    }
 }

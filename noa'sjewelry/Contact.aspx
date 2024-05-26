@@ -27,7 +27,6 @@
                 else
                 {
             %>
-            <a href="UserProfile.aspx">My Details</a>
             <a href="Cart.aspx">My Cart</a>
             <%
                 }
@@ -38,6 +37,12 @@
                 {
             %>
             <a href="Admin.aspx">Admin Page</a>
+            <%
+                }
+                else if (Session["userName"] != null)
+                {
+            %>
+            <a href="UserProfile.aspx">My Details</a>
             <%
                 }
             %>
@@ -53,16 +58,26 @@
                 }
             %>
         </div>
+        <br />
+        <div class="greeting">
+            <asp:Label ID="lblGreeting" runat="server" Text=""></asp:Label>
+        </div>
 
         <div align="center">
             <h1>Contact</h1>
-            phone number:0533325137
-            <br />
-            instegram:noas_jewely
-            <br />
-            facbook:noas_jewely1
-            <br />
-            Mail:noasjewely@gmail.com
+            <p>
+                <strong>Phone Number:</strong> 0533325137
+           
+            </p>
+            <p>
+                <strong>Instagram:</strong> <a href="https://instagram.com/noas_jewely" target="_blank">@noas_jewely</a>
+            </p>
+            <p>
+                <strong>Facebook:</strong> <a href="https://facebook.com/noas_jewely1" target="_blank">noas_jewely1</a>
+            </p>
+            <p>
+                <strong>Email:</strong> <a href="mailto:noasjewely@gmail.com">noasjewely@gmail.com</a>
+            </p>
         </div>
     </form>
 </body>

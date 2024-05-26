@@ -48,7 +48,6 @@
                     else
                     {
                 %>
-                <a href="UserProfile.aspx">My Details</a>
                 <a href="Cart.aspx">My Cart</a>
                 <%
                     }
@@ -59,6 +58,12 @@
                     {
                 %>
                 <a href="Admin.aspx">Admin Page</a>
+                <%
+                    }
+                    else if (Session["userName"] != null)
+                    {
+                %>
+                <a href="UserProfile.aspx">My Details</a>
                 <%
                     }
                 %>
