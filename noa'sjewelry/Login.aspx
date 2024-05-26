@@ -60,18 +60,17 @@
                 %>
             </div>
 
-
             <h1 style="color: pink">Login</h1>
             <table border="1">
                 <tr>
                     <td>
-                        <label for="txtUsername">Username:</label></td>
+                        Username:</td>
                     <td>
                         <asp:TextBox ID="txtUsername" runat="server"></asp:TextBox></td>
                 </tr>
                 <tr>
                     <td>
-                        <label for="txtPassword">Password:</label></td>
+                        Password:</td>
                     <td>
                         <asp:TextBox ID="txtPassword" runat="server" TextMode="Password"></asp:TextBox></td>
                 </tr>

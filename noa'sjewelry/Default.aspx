@@ -49,7 +49,7 @@
                 %>
                 <a href="Contact.aspx">Contact</a>
                 <%
-                    // if no one is connected
+                    // if user or admin is connected
                     if ((Session["userName"] != null) ||
                         (Session["isAdmin"] != null && (bool)Session["isAdmin"] == true))
                     {

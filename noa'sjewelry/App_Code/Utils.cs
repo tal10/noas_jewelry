@@ -53,8 +53,12 @@ public static class Utils
         }
         else if (session["userName"] != null)
         {
-            string userName = session["userName"].ToString();
-            greeting = $"Welcom, {userName}!";
+            string user;
+            if (session["userFullName"] != null)
+                user = session["userFullName"].ToString();
+            else
+                user = session["userName"].ToString();
+            greeting = $"Welcom, {user}!";
         }
         return greeting;
     }

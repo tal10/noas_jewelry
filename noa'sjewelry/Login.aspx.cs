@@ -16,6 +16,7 @@ public partial class Login : System.Web.UI.Page
 
     protected void btnLogin_Click(object sender, EventArgs e)
     {
+        // Take user input
         string username = txtUsername.Text;
         string password = txtPassword.Text;
 
@@ -27,14 +28,13 @@ public partial class Login : System.Web.UI.Page
         }
         else
         {
+            // Creating connection to the database
             string path = HttpContext.Current.Server.MapPath("App_Data/");
             path += "Database.mdf";
-
-            // Insert data into Users table in the database
             string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;AttachDbFilename=" + path + ";Integrated Security=True;";
             SqlConnection connection = new SqlConnection(connectionString);
 
-            // SQL query to check if username and password match
+            // SQL query to check if username and password exist in the database
             string query = "SELECT COUNT(*) FROM Users WHERE UserName = @UserName AND Password = @Password";
 
             SqlCommand command = new SqlCommand(query, connection);
@@ -43,7 +43,10 @@ public partial class Login : System.Web.UI.Page
             command.Parameters.AddWithValue("@UserName", username);
             command.Parameters.AddWithValue("@Password", password);
 
+            // Connect to the database
             connection.Open();
+
+            // Execute the query against the database
             int userCount = (int)command.ExecuteScalar();
 
             if (userCount == 1)

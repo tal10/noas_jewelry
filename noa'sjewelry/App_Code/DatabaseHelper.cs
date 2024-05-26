@@ -36,9 +36,10 @@ public static class DatabaseHelper
 
     public static string GetUserFullName(string username)
     {
+        // Get connection to database
         SqlConnection connection = GetOpenConnection();
 
-        // SQL query to check if username and password match
+        // SQL query to get the user first name and last name
         string query = "SELECT FirstName, LastName FROM Users WHERE UserName = @UserName";
 
         SqlCommand command = new SqlCommand(query, connection);
@@ -46,9 +47,11 @@ public static class DatabaseHelper
         // Add parameters to the query
         command.Parameters.AddWithValue("@UserName", username);
 
+        // Execute the quert
         SqlDataReader reader = command.ExecuteReader();
 
         string fullName = null;
+        // if results were found
         if (reader.Read())
         {
             // Retrieve user's first and last name
@@ -61,7 +64,10 @@ public static class DatabaseHelper
             fullName = $"{firstName} {lastName}";
         }
 
+        // Close connection to database
         CloseConnection(connection);
+
+        // return the full name
         return fullName;
     }
 }
