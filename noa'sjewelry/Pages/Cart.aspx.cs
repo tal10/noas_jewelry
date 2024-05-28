@@ -20,6 +20,7 @@ public partial class Cart : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        // אם משתמש רגיל לא מחובר
         if (Session["userName"] == null)
         {
             // User is not logged in, redirect to login page
