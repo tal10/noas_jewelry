@@ -56,7 +56,7 @@ public partial class Register : System.Web.UI.Page
             return;
         }
 
-        // Creating connection to the database
+        // פתיחת חיבור מול המסד נתונים
         SqlConnection connection = DatabaseHelper.GetOpenConnection();
 
         string query = "INSERT INTO Users (UserName, [Password], Gender, FirstName, LastName, Email, PhoneNumber, BirthDate) " +
@@ -95,7 +95,7 @@ public partial class Register : System.Web.UI.Page
     // Method to check if the username already exists
     private bool IsUsernameExists(string username)
     {
-        // Connect to database
+        // פתיחת חיבור מול המסד נתונים
         SqlConnection connection = DatabaseHelper.GetOpenConnection();
 
         string query = "SELECT COUNT(*) FROM Users WHERE UserName = @Username";

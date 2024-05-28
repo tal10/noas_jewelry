@@ -5,9 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Web;
 
-/// <summary>
-/// Summary description for DatabaseHelper
-/// </summary>
+// מחלקה המכילה פונקציות עזר לעבודה מול מסד הנתונים
 public static class DatabaseHelper
 {
     private static readonly string ConnectionString;
@@ -19,6 +17,7 @@ public static class DatabaseHelper
         ConnectionString = "Data Source=(localdb)\\MSSQLLocalDB;AttachDbFilename=" + path + ";Integrated Security=True;";
     }
 
+    // פונקציה היוצרת חיבור מול מסד הנתונים
     public static SqlConnection GetOpenConnection()
     {
         SqlConnection connection = new SqlConnection(ConnectionString);
@@ -26,6 +25,7 @@ public static class DatabaseHelper
         return connection;
     }
 
+    // פונקציה הסוגרת חיבור פתוח מול מסד הנתונים
     public static void CloseConnection(SqlConnection connection)
     {
         if (connection != null && connection.State == ConnectionState.Open)
@@ -34,7 +34,8 @@ public static class DatabaseHelper
         }
     }
 
-    public static string GetUserFullName(string username)
+    // פונקציה המקבלת שם משתמש ומחזירה את השם המלא של המשתמש ממסד הנתונים
+    public static string GetUserFullName(string userName)
     {
         // Get connection to database
         SqlConnection connection = GetOpenConnection();
@@ -45,7 +46,7 @@ public static class DatabaseHelper
         SqlCommand command = new SqlCommand(query, connection);
 
         // Add parameters to the query
-        command.Parameters.AddWithValue("@UserName", username);
+        command.Parameters.AddWithValue("@UserName", userName);
 
         // Execute the quert
         SqlDataReader reader = command.ExecuteReader();

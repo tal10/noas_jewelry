@@ -28,7 +28,7 @@ public partial class Login : System.Web.UI.Page
         }
         else
         {
-            // Creating connection to the database
+            // פתיחת חיבור מול המסד נתונים
             SqlConnection connection = DatabaseHelper.GetOpenConnection();
 
             // SQL query to check if username and password exist in the database

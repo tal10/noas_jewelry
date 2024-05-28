@@ -44,16 +44,21 @@ public static class Utils
         return menuHTML;
     }
 
+    // פונקציה המקבלת את הסשין ויודעת להחזיר הודעת ברוך הבא בהתאמם למשתמש המחובר - משתמש רגיל או מנהל
     public static string GetGreeting(HttpSessionState session)
     {
         string greeting = null;
+        
+        // אם המנהל מחובר
         if (session["isAdmin"] != null && (bool)session["isAdmin"] == true)
         {
             greeting = "Welcome, Admin!";
         }
+        // אם משתמש רגיל מחובר
         else if (session["userName"] != null)
         {
             string user;
+            // השם המלא של המשתמש
             if (session["userFullName"] != null)
                 user = session["userFullName"].ToString();
             else

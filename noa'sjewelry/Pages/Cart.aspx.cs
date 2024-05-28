@@ -28,9 +28,10 @@ public partial class Cart : System.Web.UI.Page
 
         lblGreeting.Text = Utils.GetGreeting(Session);
 
+        // האם מדובר בטעינה הראשונה של העמוד
         if (!IsPostBack)
         {
-            BindCart();// טעינת נתוני העגלה
+            BindCart(); // טעינת נתוני העגלה
         }
     }
 
@@ -110,7 +111,7 @@ public partial class Cart : System.Web.UI.Page
         // Initialize a flag to track whether the removal operation was successful
         bool isRemoved = false;
 
-        // Connect to the database
+        // פתיחת חיבור מול המסד נתונים
         SqlConnection connection = DatabaseHelper.GetOpenConnection();
 
         // Check if the jewelry item exists in the cart

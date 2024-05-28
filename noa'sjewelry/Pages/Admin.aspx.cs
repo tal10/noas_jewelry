@@ -18,6 +18,7 @@ public partial class Admin : System.Web.UI.Page
 
         lblGreeting.Text = Utils.GetGreeting(Session); 
 
+        // האם מדובר בטעינה הראשונה של העמוד
         if (!IsPostBack)
         {
             // טעינת פרטי המשתמשים

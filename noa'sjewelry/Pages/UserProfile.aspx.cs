@@ -19,6 +19,7 @@ public partial class UserProfile : System.Web.UI.Page
 
         lblGreeting.Text = Utils.GetGreeting(Session);
 
+        // האם מדובר בטעינה הראשונה של העמוד
         if (!IsPostBack)
         {
             // Load user details
@@ -33,7 +34,7 @@ public partial class UserProfile : System.Web.UI.Page
 
         if (!string.IsNullOrEmpty(userName))
         {
-            // Fetch user details from the database
+            // פתיחת חיבור מול המסד נתונים
             SqlConnection connection = DatabaseHelper.GetOpenConnection();
 
             string query = "SELECT FirstName, LastName, Email, PhoneNumber, BirthDate FROM Users WHERE UserName = @UserName";
@@ -62,9 +63,10 @@ public partial class UserProfile : System.Web.UI.Page
 
         if (!string.IsNullOrEmpty(userName))
         {
-            // Update user details in the database
+            // פתיחת חיבור מול המסד נתונים
             SqlConnection connection = DatabaseHelper.GetOpenConnection();
 
+            // Update user details in the database
             string query = "UPDATE Users SET FirstName = @FirstName, LastName = @LastName, Email = @Email, PhoneNumber = @PhoneNumber, BirthDate = @BirthDate";
             if (!string.IsNullOrEmpty(txtPassword.Text))
             {

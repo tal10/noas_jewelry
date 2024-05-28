@@ -13,6 +13,7 @@ public partial class JewelerisType : System.Web.UI.Page
     {
         lblGreeting.Text = Utils.GetGreeting(Session);
 
+        // האם מדובר בטעינה הראשונה של העמוד
         if (!IsPostBack)
         {
             // טעינת התכשיטים 
@@ -23,12 +24,14 @@ public partial class JewelerisType : System.Web.UI.Page
     // פעולה לטעינת התכשיטים בהתאם לסוג התכשיט
     private void LoadJewelries()
     {
-        // קבלת סוג התכשיט ממחרוזת השאילתה בכתובת ה-URL
+        // קבלת הפרמטת type
+        // שהוא בעצם סוג התכשיט
         string jewelryType = Request.QueryString["type"];
 
+        // אם הסוג תכשיט לא קיים
         if (string.IsNullOrEmpty(jewelryType))
         {
-            // אם הסוג לא קיים, הצגת הודעת שגיאה
+            // הצגת הודעת שגיאה
             lblMessage.Text = "Jewelry not available";
             return;
         }
@@ -36,23 +39,27 @@ public partial class JewelerisType : System.Web.UI.Page
         // Construct SQL query to select jewelries of the specified type
         string query = "SELECT JewelryID, Name, Price, PictureUrl FROM Jewelries WHERE Type = @Type";
 
+        // פתיחת חיבור מול המסד נתונים  
         SqlConnection connection = DatabaseHelper.GetOpenConnection();
 
         SqlCommand command = new SqlCommand(query, connection);
         command.Parameters.AddWithValue("@Type", jewelryType);
 
+        // הרצת השאילתה המחזירה את כל התכשיטים של סוג מסוים
         SqlDataReader reader = command.ExecuteReader();
 
+        // אם לא קיימים נתונים
         if (!reader.HasRows)
         {
             lblMessage.Text = "Jewelry not available";
         }
         else
         {
-            // Bind the data to the Repeater control
+            // לוקחים את הנתונים שחזרו ממסד הנתונים ומכניסים אותם לתוך הריפיטר
             rptJewelries.DataSource = reader;
             rptJewelries.DataBind();
         }
+
         reader.Close();
         DatabaseHelper.CloseConnection(connection);
     }
@@ -77,6 +84,7 @@ public partial class JewelerisType : System.Web.UI.Page
 
     public bool AddJewelryToCart(string jewelryId, string userName)
     {
+        // פתיחת חיבור מול המסד נתונים
         SqlConnection connection = DatabaseHelper.GetOpenConnection();
 
         // Query the database to get the name and price of the jewelry item
@@ -128,9 +136,6 @@ public partial class JewelerisType : System.Web.UI.Page
             DatabaseHelper.CloseConnection(connection);
             return rowsAffected > 0;
         }
-
-
-
 
         /*
         SqlConnection connection = DatabaseHelper.GetOpenConnection();
