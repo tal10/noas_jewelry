@@ -14,7 +14,7 @@ public static class DatabaseHelper
 
     static DatabaseHelper()
     {
-        string path = HttpContext.Current.Server.MapPath("App_Data/");
+        string path = HttpContext.Current.Server.MapPath("~/App_Data/");
         path += "Database.mdf";
         ConnectionString = "Data Source=(localdb)\\MSSQLLocalDB;AttachDbFilename=" + path + ";Integrated Security=True;";
     }

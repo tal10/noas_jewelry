@@ -1,12 +1,12 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Contact.aspx.cs" Inherits="Contact" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Cart.aspx.cs" Inherits="Cart" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Contact</title>
+    <title>Cart</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <link rel="stylesheet" href="Styles/StyleSheet.css" />
+    <link rel="stylesheet" href="../Styles/StyleSheet.css" />
 </head>
 <body>
     <form id="form1" runat="server">
@@ -16,7 +16,7 @@
             </a>
 
             <%
-                // if no one is connected
+
                 if ((Session["userName"] == null) && (Session["isAdmin"] == null))
                 {
             %>
@@ -24,7 +24,7 @@
             <a href="Register.aspx">Register</a>
             <%
                 }
-        
+
             %>
             <a href="Jeweleris.aspx">Jeweleris</a>
             <%
@@ -38,7 +38,7 @@
                 {
             %>
             <a href="UserProfile.aspx">My Details</a>
-             <a href="Cart.aspx">My Cart</a>
+            <a href="Cart.aspx">My Cart</a>
             <%
                 }
             %>
@@ -54,26 +54,37 @@
                 }
             %>
         </div>
+
+
+
+
         <br />
         <div class="greeting">
             <asp:Label ID="lblGreeting" runat="server" Text=""></asp:Label>
         </div>
 
         <div align="center">
-            <h1>Contact</h1>
-            <p>
-                <strong>Phone Number:</strong> 0533325137
-           
-            </p>
-            <p>
-                <strong>Instagram:</strong> <a href="https://instagram.com/noas_jewely" target="_blank">@noas_jewely</a>
-            </p>
-            <p>
-                <strong>Facebook:</strong> <a href="https://facebook.com/noas_jewely1" target="_blank">noas_jewely1</a>
-            </p>
-            <p>
-                <strong>Email:</strong> <a href="mailto:noasjewely@gmail.com">noasjewely@gmail.com</a>
-            </p>
+            <h1>My cart</h1>
+
+            <asp:Repeater ID="rptCartItems" runat="server" OnItemCommand="rptCartItems_ItemCommand">
+                <ItemTemplate>
+                    <div>
+                        <h2><%# Eval("Name") %></h2>
+                        <!-- שם התכשיט -->
+                        <br />
+                        <img src="../Images/<%# Eval("PictureUrl") %>" width="200px" height="200px" alt='<%# Eval("Name") %>' /><!-- תמונת התכשיט -->
+                        <p>Quantity: <%# Eval("Quantity") %></p>
+                        <!-- כמות התכשיטים -->
+                        <p>Price: <%# Eval("Price", "{0:C}") %></p>
+                        <!-- מחיר התכשיט -->
+                        <asp:Button ID="btnRemoveFromCart" runat="server" Text="Remove" CommandName="RemoveFromCart" CommandArgument='<%# Eval("JewelryId") %>' />
+                    </div>
+                    <hr />
+                </ItemTemplate>
+            </asp:Repeater>
+
+            <asp:Label ID="lblMessage" runat="server" Text="" ForeColor="Red"></asp:Label>
+            <!-- תווית להודעות למשתמש על הקנייה-->
         </div>
     </form>
 </body>

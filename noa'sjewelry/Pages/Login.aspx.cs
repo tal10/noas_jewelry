@@ -10,7 +10,7 @@ public partial class Login : System.Web.UI.Page
             (Session["userName"] != null))
         {
             // Redirect to login page or unauthorized access page
-            Response.Redirect("~/Default.aspx");
+            Response.Redirect("Default.aspx");
         }
     }
 
@@ -24,15 +24,12 @@ public partial class Login : System.Web.UI.Page
         if (username == "admin" && password == "password")
         {
             Session["isAdmin"] = true;
-            Response.Redirect("~/Default.aspx");
+            Response.Redirect("Default.aspx");
         }
         else
         {
             // Creating connection to the database
-            string path = HttpContext.Current.Server.MapPath("App_Data/");
-            path += "Database.mdf";
-            string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;AttachDbFilename=" + path + ";Integrated Security=True;";
-            SqlConnection connection = new SqlConnection(connectionString);
+            SqlConnection connection = DatabaseHelper.GetOpenConnection();
 
             // SQL query to check if username and password exist in the database
             string query = "SELECT COUNT(*) FROM Users WHERE UserName = @UserName AND Password = @Password";
@@ -43,11 +40,10 @@ public partial class Login : System.Web.UI.Page
             command.Parameters.AddWithValue("@UserName", username);
             command.Parameters.AddWithValue("@Password", password);
 
-            // Connect to the database
-            connection.Open();
-
             // Execute the query against the database
             int userCount = (int)command.ExecuteScalar();
+
+            DatabaseHelper.CloseConnection(connection);
 
             if (userCount == 1)
             {
@@ -55,7 +51,7 @@ public partial class Login : System.Web.UI.Page
                 Session["userFullName"] = DatabaseHelper.GetUserFullName(username);
 
                 // Login successful, redirect to home page or dashboard
-                Response.Redirect("~/Default.aspx");
+                Response.Redirect("Default.aspx");
             }
             else
             {

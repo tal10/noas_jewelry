@@ -1,12 +1,12 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Admin.aspx.cs" Inherits="Admin" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Contact.aspx.cs" Inherits="Contact" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Admin Page</title>
+    <title>Contact</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <link rel="stylesheet" href="Styles/StyleSheet.css" />
+    <link rel="stylesheet" href="../Styles/StyleSheet.css" />
 </head>
 <body>
     <form id="form1" runat="server">
@@ -16,17 +16,17 @@
             </a>
 
             <%
-               //אם אף אחד לא מחובר
+                // if no one is connected
                 if ((Session["userName"] == null) && (Session["isAdmin"] == null))
                 {
             %>
             <a href="Login.aspx">Login</a>
-            <a href="Register.aspx">Register</a> 
+            <a href="Register.aspx">Register</a>
             <%
                 }
-           
+        
             %>
-            <a href="Jeweleris.aspx">Jeweleris</a> 
+            <a href="Jeweleris.aspx">Jeweleris</a>
             <%
                 if (Session["isAdmin"] != null && (bool)Session["isAdmin"] == true)
                 {
@@ -44,7 +44,7 @@
             %>
             <a href="Contact.aspx">Contact</a>
             <%
-               
+                // if no one is connected
                 if ((Session["userName"] != null) ||
                     (Session["isAdmin"] != null && (bool)Session["isAdmin"] == true))
                 {
@@ -60,23 +60,20 @@
         </div>
 
         <div align="center">
-            <h1>Admin Page</h1>
-            <asp:GridView ID="GridViewUsers" runat="server" AutoGenerateColumns="false" OnRowDeleting="GridViewUsers_RowDeleting" OnRowCommand="GridViewUsers_RowCommand" BorderWidth="2">
-                <Columns>
-                    <asp:BoundField DataField="UserName" HeaderText="Username" />
-                    <asp:BoundField DataField="FirstName" HeaderText="First Name" />
-                    <asp:BoundField DataField="LastName" HeaderText="Last Name" />
-                    <asp:BoundField DataField="Email" HeaderText="Email" />
-                    <asp:BoundField DataField="Password" HeaderText="Password" />
-                    <asp:BoundField DataField="PhoneNumber" HeaderText="Phone Number" />
-                    <asp:BoundField DataField="BirthDate" HeaderText="Birth Date" />
-                    <asp:TemplateField HeaderText="Actions">
-                        <ItemTemplate>
-                            <asp:LinkButton ID="btnDelete" runat="server" CommandName="Delete" CommandArgument='<%# Eval("UserName") %>'>Delete</asp:LinkButton>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                </Columns>
-            </asp:GridView>
+            <h1>Contact</h1>
+            <p>
+                <strong>Phone Number:</strong> 0533325137
+           
+            </p>
+            <p>
+                <strong>Instagram:</strong> <a href="https://instagram.com/noas_jewely" target="_blank">@noas_jewely</a>
+            </p>
+            <p>
+                <strong>Facebook:</strong> <a href="https://facebook.com/noas_jewely1" target="_blank">noas_jewely1</a>
+            </p>
+            <p>
+                <strong>Email:</strong> <a href="mailto:noasjewely@gmail.com">noasjewely@gmail.com</a>
+            </p>
         </div>
     </form>
 </body>

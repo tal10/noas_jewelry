@@ -6,7 +6,7 @@
 <head runat="server">
     <title>Jeweleris</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <link rel="stylesheet" href="Styles/StyleSheet.css" />
+    <link rel="stylesheet" href="../Styles/StyleSheet.css" />
 </head>
 <body>
     <form id="form1" runat="server">

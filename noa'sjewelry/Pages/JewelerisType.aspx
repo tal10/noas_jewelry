@@ -1,12 +1,12 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="Login" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="JewelerisType.aspx.cs" Inherits="JewelerisType" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Login</title>
+    <title>Jeweleris Type</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <link rel="stylesheet" href="Styles/StyleSheet.css" />
+    <link rel="stylesheet" href="../Styles/StyleSheet.css" />
 </head>
 <body>
     <form id="form1" runat="server">
@@ -25,7 +25,7 @@
                 <a href="Register.aspx">Register</a>
                 <%
                     }
-        
+             
                 %>
                 <a href="Jeweleris.aspx">Jeweleris</a>
                 <%
@@ -55,34 +55,40 @@
                     }
                 %>
             </div>
+            <br />
+            <div class="greeting">
+                <asp:Label ID="lblGreeting" runat="server" Text=""></asp:Label>
+            </div>
 
-            <h1 style="color: pink">Login</h1>
-            <table border="1">
-                <tr>
-                    <td>
-                        Username:</td>
-                    <td>
-                        <asp:TextBox ID="txtUsername" runat="server"></asp:TextBox></td>
-                </tr>
-                <tr>
-                    <td>
-                        Password:</td>
-                    <td>
-                        <asp:TextBox ID="txtPassword" runat="server" TextMode="Password"></asp:TextBox></td>
-                </tr>
-                <tr>
-                    <td colspan="2" align="center">
-                        <asp:Button ID="btnLogin" runat="server" Text="Login" OnClick="btnLogin_Click" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <asp:Label ID="lblMessage" runat="server" Text="" ForeColor="Red"></asp:Label></td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="registerRow">if you don't have an account you can register <a href="Register.aspx">here</a>
-                    </td>
-                </tr>
-            </table>
+            <h1>Jewelry List</h1>
+
+              <!-- רפיטר להצגת רשימת התכשיטים -->
+            <asp:Repeater ID="rptJewelries" runat="server">
+                <ItemTemplate>
+                    <div class="jewelryType">
+                    <!-- הצגת שם התכשיט -->
+                    <h2><%# Eval("Name") %></h2>
+                    <!-- הצגת מחיר התכשיט -->
+                    <p>Price: <%# Eval("Price") %></p>
+                    <!-- הצגת תמונת התכשיט -->
+                    <img src="../Images/<%# Eval("PictureUrl") %>" width="200px" height="200px" alt='<%# Eval("Name") %>' />
+                    <%  
+                              // אם משתמש מחובר
+                            if ((Session["userName"] != null))
+                            {
+                        %>
+                        <br />
+                          <!-- כפתור להוספה לעגלה -->
+                        <asp:Button ID="btnAddToCart" runat="server" Text="Add to Cart" OnClick="btnAddToCart_Click" CommandArgument='<%# Eval("JewelryId") %>' />
+                        <% 
+                            }
+                        %>
+                    </div>
+                    <br />
+                </ItemTemplate>
+            </asp:Repeater>
+
+            <asp:Label ID="lblMessage" runat="server" Text="" ForeColor="Red"></asp:Label>
         </div>
     </form>
 </body>

@@ -79,9 +79,66 @@ public partial class Cart : System.Web.UI.Page
             cartItems.Add(item); // הוספת הפריט לרשימת העגלה
         }
 
-        reader.Close(); 
+        reader.Close();
         DatabaseHelper.CloseConnection(connection); // סגירת החיבור למסד הנתונים
         return cartItems; // החזרת רשימת פריטי העגלה;
     }
 
+    protected void rptCartItems_ItemCommand(object source, RepeaterCommandEventArgs e)
+    {
+        if (e.CommandName == "RemoveFromCart")
+        {
+            string jewelryIdToRemove = e.CommandArgument.ToString();
+            string userName = Session["userName"].ToString();
+
+            bool isRemoved = RemoveJewelryFromCart(jewelryIdToRemove, userName);
+
+            if (isRemoved)
+            {
+                lblMessage.Text = "Jewelry removed from the cart successfully";
+                BindCart(); // Rebind the cart after removal
+            }
+            else
+            {
+                lblMessage.Text = "Failed to remove jewelry from the cart";
+            }
+        }
+    }
+
+    public bool RemoveJewelryFromCart(string jewelryId, string userName)
+    {
+        // Initialize a flag to track whether the removal operation was successful
+        bool isRemoved = false;
+
+        // Connect to the database
+        SqlConnection connection = DatabaseHelper.GetOpenConnection();
+
+        // Check if the jewelry item exists in the cart
+        string checkQuery = "SELECT COUNT(*) FROM CartItems WHERE UserName = @UserName AND JewelryID = @JewelryID";
+        SqlCommand checkCommand = new SqlCommand(checkQuery, connection);
+        checkCommand.Parameters.AddWithValue("@UserName", userName);
+        checkCommand.Parameters.AddWithValue("@JewelryID", jewelryId);
+
+        int count = (int)checkCommand.ExecuteScalar();
+
+        if (count > 0)
+        {
+            // If the jewelry item exists in the cart, delete it
+            string deleteQuery = "DELETE FROM CartItems WHERE UserName = @UserName AND JewelryID = @JewelryID";
+            SqlCommand deleteCommand = new SqlCommand(deleteQuery, connection);
+            deleteCommand.Parameters.AddWithValue("@UserName", userName);
+            deleteCommand.Parameters.AddWithValue("@JewelryID", jewelryId);
+
+            int rowsAffected = deleteCommand.ExecuteNonQuery();
+
+            // If rows were affected, the deletion was successful
+            if (rowsAffected > 0)
+            {
+                isRemoved = true;
+            }
+        }
+
+        // Return true if the jewelry item was successfully removed, otherwise false
+        return isRemoved;
+    }
 }

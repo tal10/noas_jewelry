@@ -18,7 +18,7 @@ public partial class Register : System.Web.UI.Page
             (Session["userName"] != null))
         {
             // Redirect to home page
-            Response.Redirect("~/Default.aspx");
+            Response.Redirect("Default.aspx");
         }
     }
 
@@ -56,11 +56,8 @@ public partial class Register : System.Web.UI.Page
             return;
         }
 
-        // Connect to database
-        string path = HttpContext.Current.Server.MapPath("App_Data/");
-        path += "Database.mdf";
-        string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;AttachDbFilename=" + path + ";Integrated Security=True;";
-        SqlConnection connection = new SqlConnection(connectionString);
+        // Creating connection to the database
+        SqlConnection connection = DatabaseHelper.GetOpenConnection();
 
         string query = "INSERT INTO Users (UserName, [Password], Gender, FirstName, LastName, Email, PhoneNumber, BirthDate) " +
                        "VALUES (@Username, @Password, @Gender, @FirstName, @LastName, @Email, @PhoneNumber, @Birthdate)";
@@ -76,14 +73,11 @@ public partial class Register : System.Web.UI.Page
         command.Parameters.AddWithValue("@PhoneNumber", phoneNumber);
         command.Parameters.AddWithValue("@Birthdate", birthDate);
 
-        // Open the connection to the database
-        connection.Open();
-
         // Execute the query - Insert new row into Users table
         int rowsAffected = command.ExecuteNonQuery();
 
         // Close the connection to the database
-        connection.Close();
+        DatabaseHelper.CloseConnection(connection);
 
         // If user name added successfully
         if (rowsAffected > 0)
