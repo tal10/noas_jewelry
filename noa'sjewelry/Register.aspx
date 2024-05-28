@@ -45,12 +45,7 @@
                 <a href="Register.aspx">Register</a>
                 <%
                     }
-                    else
-                    {
-                %>
-                <a href="Cart.aspx">My Cart</a>
-                <%
-                    }
+            
                 %>
                 <a href="Jeweleris.aspx">Jeweleris</a>
                 <%
@@ -64,6 +59,7 @@
                     {
                 %>
                 <a href="UserProfile.aspx">My Details</a>
+                 <a href="Cart.aspx">My Cart</a>
                 <%
                     }
                 %>

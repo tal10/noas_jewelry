@@ -25,12 +25,7 @@
                 <a href="Register.aspx">Register</a>
                 <%
                     }
-                    else
-                    {
-                %>
-                <a href="Cart.aspx">My Cart</a>
-                <%
-                    }
+             
                 %>
                 <a href="Jeweleris.aspx">Jeweleris</a>
                 <%
@@ -44,6 +39,7 @@
                     {
                 %>
                 <a href="UserProfile.aspx">My Details</a>
+                 <a href="Cart.aspx">My Cart</a>
                 <%
                     }
                 %>
@@ -66,14 +62,27 @@
 
             <h1>Jewelry List</h1>
 
+              <!-- רפיטר להצגת רשימת התכשיטים -->
             <asp:Repeater ID="rptJewelries" runat="server">
                 <ItemTemplate>
                     <div class="jewelryType">
-                        <h2><%# Eval("Name") %></h2>
-                        <p>Price: <%# Eval("Price") %></p>
-                        <img src="Images/<%# Eval("PictureUrl") %>" width="200px" height="200px" alt='<%# Eval("Name") %>' />
+                    <!-- הצגת שם התכשיט -->
+                    <h2><%# Eval("Name") %></h2>
+                    <!-- הצגת מחיר התכשיט -->
+                    <p>Price: <%# Eval("Price") %></p>
+                    <!-- הצגת תמונת התכשיט -->
+                    <img src="Images/<%# Eval("PictureUrl") %>" width="200px" height="200px" alt='<%# Eval("Name") %>' />
+                    <%  
+                              // אם משתמש מחובר
+                            if ((Session["userName"] != null))
+                            {
+                        %>
                         <br />
+                          <!-- כפתור להוספה לעגלה -->
                         <asp:Button ID="btnAddToCart" runat="server" Text="Add to Cart" OnClick="btnAddToCart_Click" CommandArgument='<%# Eval("JewelryId") %>' />
+                        <% 
+                            }
+                        %>
                     </div>
                     <br />
                 </ItemTemplate>

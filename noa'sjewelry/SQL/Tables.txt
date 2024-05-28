@@ -17,3 +17,12 @@ CREATE TABLE Jewelries (
     [PictureUrl] NVARCHAR(MAX) NOT NULL, 
     [Type] INT NOT NULL
 );
+
+CREATE TABLE CartItems (
+    CartItemID INT PRIMARY KEY IDENTITY(1,1),
+    UserID INT NOT NULL,
+    JewelryID INT NOT NULL,
+    Quantity INT NOT NULL,
+    FOREIGN KEY (UserID) REFERENCES Users(UserID),
+    FOREIGN KEY (JewelryID) REFERENCES Jewelries(JewelryID)
+);

@@ -16,7 +16,7 @@
             </a>
 
             <%
-                // if no one is connected
+               
                 if ((Session["userName"] == null) && (Session["isAdmin"] == null))
                 {
             %>
@@ -24,12 +24,7 @@
             <a href="Register.aspx">Register</a>
             <%
                 }
-                else
-                {
-            %>
-            <a href="Cart.aspx">My Cart</a>
-            <%
-                }
+          
             %>
             <a href="Jeweleris.aspx">Jeweleris</a>
             <%
@@ -43,6 +38,7 @@
                 {
             %>
             <a href="UserProfile.aspx">My Details</a>
+            <a href="Cart.aspx">My Cart</a>
             <%
                 }
             %>
@@ -58,6 +54,10 @@
                 }
             %>
         </div>
+
+
+
+
         <br />
         <div class="greeting">
             <asp:Label ID="lblGreeting" runat="server" Text=""></asp:Label>
@@ -69,15 +69,17 @@
             <asp:Repeater ID="rptCartItems" runat="server">
                 <ItemTemplate>
                     <div>
-                        <h2><%# Eval("Name") %></h2>
-                        <p>Price: <%# Eval("Price", "{0:C}") %></p>
-                        <!-- Display other details if needed -->
+                        <h2><%# Eval("Name") %></h2> <!-- שם התכשיט -->
+                        <br />
+                        <img src="Images/<%# Eval("PictureUrl") %>" width="200px" height="200px" alt='<%# Eval("Name") %>' /><!-- תמונת התכשיט -->
+                        <h2><%# Eval("Quantity") %></h2> <!-- כמות התכשיטים -->
+                        <p>Price: <%# Eval("Price", "{0:C}") %></p> <!-- מחיר התכשיט -->
                     </div>
                     <br />
                 </ItemTemplate>
             </asp:Repeater>
 
-            <asp:Label ID="lblMessage" runat="server" Text="" ForeColor="Red"></asp:Label>
+            <asp:Label ID="lblMessage" runat="server" Text="" ForeColor="Red"></asp:Label> <!-- תווית להודעות למשתמש על הקנייה-->
         </div>
     </form>
 </body>

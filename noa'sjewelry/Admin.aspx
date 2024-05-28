@@ -16,22 +16,17 @@
             </a>
 
             <%
-                // if no one is connected
+               //אם אף אחד לא מחובר
                 if ((Session["userName"] == null) && (Session["isAdmin"] == null))
                 {
             %>
             <a href="Login.aspx">Login</a>
-            <a href="Register.aspx">Register</a>
+            <a href="Register.aspx">Register</a> 
             <%
                 }
-                else
-                {
+           
             %>
-            <a href="Cart.aspx">My Cart</a>
-            <%
-                }
-            %>
-            <a href="Jeweleris.aspx">Jeweleris</a>
+            <a href="Jeweleris.aspx">Jeweleris</a> 
             <%
                 if (Session["isAdmin"] != null && (bool)Session["isAdmin"] == true)
                 {
@@ -43,12 +38,13 @@
                 {
             %>
             <a href="UserProfile.aspx">My Details</a>
+             <a href="Cart.aspx">My Cart</a>
             <%
                 }
             %>
             <a href="Contact.aspx">Contact</a>
             <%
-                // if no one is connected
+               
                 if ((Session["userName"] != null) ||
                     (Session["isAdmin"] != null && (bool)Session["isAdmin"] == true))
                 {
@@ -71,6 +67,7 @@
                     <asp:BoundField DataField="FirstName" HeaderText="First Name" />
                     <asp:BoundField DataField="LastName" HeaderText="Last Name" />
                     <asp:BoundField DataField="Email" HeaderText="Email" />
+                    <asp:BoundField DataField="Password" HeaderText="Password" />
                     <asp:BoundField DataField="PhoneNumber" HeaderText="Phone Number" />
                     <asp:BoundField DataField="BirthDate" HeaderText="Birth Date" />
                     <asp:TemplateField HeaderText="Actions">
