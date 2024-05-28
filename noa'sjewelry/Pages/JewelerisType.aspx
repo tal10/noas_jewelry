@@ -80,10 +80,11 @@
                         <br />
                         <!-- כפתור להוספה לעגלה -->
                         <asp:Button ID="btnAddToCart" runat="server" Text="Add to Cart" OnClick="btnAddToCart_Click" CommandArgument='<%# Eval("JewelryId") %>' />
-                        <br /> &nbsp;
                         <% 
                             }
                         %>
+                        <br />
+                        &nbsp;
                     </div>
                     <br />
                 </ItemTemplate>
